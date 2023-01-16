@@ -25,22 +25,6 @@ public class Main {
                     System.out.println("bad input");
                 }
             }
-            /*loop: while (true) {
-                System.out.print("Do you want to convert /from decimal or /to decimal? (to quit type /exit): ");
-                switch (sc.nextLine()) {
-                    case "/from":
-                        converter.convertFromDecimal(sc);
-                        break;
-                    case "/to":
-                        converter.convertToDecimal(sc);
-                        break;
-                    case "/exit":
-                        break loop;
-                    default:
-                        break;
-                }
-            }*/
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
