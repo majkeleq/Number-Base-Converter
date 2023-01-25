@@ -11,13 +11,10 @@ public class Converter {
             if (input.equals("/back")) {
                 break;
             }
-            ConvertedNumber integerPart = new ConvertedNumber(input);
-            //integerPart.convertFromDecimal(integerPart.convertToDecimal(input, srcBase), targetBase);
-            //System.out.println("Conversion result: " + integerPart.getIntegerPart());
-            //System.out.println(integerPart.convertFromDecimal(integerPart.convertToDecimal(input, srcBase), targetBase));
-            //System.out.println("Decimal result: " + integerPart.convertToDecimal(input, srcBase));
-            System.out.println("Conversion result: " + integerPart.convertFromDecimal(integerPart.convertToDecimal(input, srcBase), targetBase));
-            //System.out.println();
+            ConvertedNumber convertedNumber = new ConvertedNumber(input);
+            convertedNumber.convert(srcBase, targetBase);
+            System.out.println("Conversion result: " + convertedNumber.getConvertedNumber());
+            //System.out.println("Conversion result: " + integerPart.convertFromDecimal(integerPart.convertToDecimal(srcBase), targetBase));
         }
     }
 

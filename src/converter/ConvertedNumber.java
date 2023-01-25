@@ -4,25 +4,32 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class ConvertedNumber {
-    private StringBuilder convertedNumber = new StringBuilder("");
+    private String convertedNumber;
 
-    public ConvertedNumber(String integerPart) {
-        this.convertedNumber.append(integerPart);
+    public ConvertedNumber(String input) {
+        this.convertedNumber = input;
     }
 
-    public void setConvertedNumber(String integerPart) {
-        this.convertedNumber.setLength(0);
-        this.convertedNumber.append(integerPart);
-    }
-
-    public StringBuilder getIntegerPart() {
+    public String getConvertedNumber() {
         return convertedNumber;
     }
 
-    public String convertFromDecimal(BigDecimal decimal, int targetBase) {
+    public void setConvertedNumber(String number) {
+        this.convertedNumber = number;
+    }
+
+    public void convert(int srcBase, int targetBase) {
+        BigDecimal decimal = convertToDecimal(srcBase);
+        if (targetBase != 10) {
+            this.setConvertedNumber(convertFromDecimal(decimal, targetBase));
+        } else {
+            this.setConvertedNumber(decimal.toString());
+        }
+    }
+    private String convertFromDecimal(BigDecimal decimal, int targetBase) {
         StringBuilder result = new StringBuilder();
         int remainder;
-        while (decimal.setScale(0, RoundingMode.FLOOR) != BigDecimal.ZERO) {
+        while (decimal.setScale(0, RoundingMode.FLOOR).equals(BigDecimal.ZERO)) {
             remainder = decimal.setScale(0,  RoundingMode.FLOOR).remainder(BigDecimal.valueOf(targetBase)).intValue();
             if (remainder >= 10) {
                 result.append((char) (remainder + 55));
@@ -51,9 +58,9 @@ public class ConvertedNumber {
         return result.toString();
     }
 
-    public BigDecimal convertToDecimal(String sourceNumber, int sourceBase) {
+    private BigDecimal convertToDecimal(int sourceBase) {
         BigDecimal result = BigDecimal.ZERO;
-        String[] numberParts = sourceNumber.split("\\.");
+        String[] numberParts = convertedNumber.split("\\.");
         //System.out.println(Arrays.toString(numberParts));
         int value;
         for (int i = 0; i < numberParts[0].length(); i++) {
